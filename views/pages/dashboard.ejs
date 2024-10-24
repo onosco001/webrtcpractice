@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<%- include('../partials/head.ejs') %> 
+<title>Psychiatric Patient Dashboard</title>
+ 
+</head>
+
+<body>
+ 
+  <%- include('../partials/header.ejs') %> 
+   
+<div class="dashboardlayout">
+  <div class="flexingdashboard"> 
+        
+    <div class="balance">
+        <h2>Last Transaction</h2> 
+        <ul>
+            <% if (orders && orders.length > 0) { %>
+                <% orders[0].myServices.forEach(eachok => { %> 
+                    <li><strong>Last transaction service</strong>: <%= eachok.serviceName %></li>
+                    <li><strong>Last Transaction amount</strong>: €<%= eachok.servicePrice %></li>
+                <% }); %>
+            <% } else { %>
+                <li>No transactions yet</li>
+            <% } %> 
+        </ul>
+        <button onclick="serviceo()">Order Service</button>
+    </div>
+
+    <div class="appointments">
+        <h2>Appointments</h2>
+        <% if (orders && orders.length > 0) { %>
+            <ul> 
+                <% orders.forEach(order => { %>
+                    <% for (let i = 0; i < order.day.length; i++) { %>
+                        <li>
+                            <strong><%= order.day[i] %> - <%= order.session[i] %></strong>
+                            <ul>
+                                <% order.myServices.forEach(service => { %>
+                                    <li><%= service.serviceName %></li>
+                                <% }); %>
+                            </ul>
+                        </li>
+                    <% } %>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No appointments yet</p>
+        <% } %>
+    </div>
+
+    <div class="services">
+        <h2>Available Services</h2>  
+        <p>Psychotherapy</p>
+        <p>Medical counselling</p>
+        <button id="ocarts">View Carts</button>
+    </div> 
+        
+    <div class="sidebara"> 
+        <h2>Profile Information</h2>
+        <p><strong>Name</strong>: <%= uuser.reguser %></p> 
+        <p><strong>ID</strong>: <%= uuser.userId %></p>
+        <p><strong>Contact</strong>: <%= uuser.regemail %></p>
+        
+        <br>
+        <h2>Settings</h2>
+        <ul>
+            <li class="settings" style="cursor:pointer">Account Settings</li>  
+        </ul> 
+      
+        <br>
+        <h2>Session</h2>
+        <ul>
+            <li id="logmeout" class="logout" style="cursor:pointer">Logout</li>  
+        </ul>
+    </div> 
+
+  </div>  
+
+  <div class="sidebar2">  
+    <h2>Profile Information</h2>
+    <p><strong>Name</strong>: <%= uuser.reguser %></p> 
+    <p><strong>ID</strong>: <%= uuser.userId %></p>
+    <p><strong>Contact</strong>: <%= uuser.regemail %></p>
+    <br>
+    <h2>Settings</h2>
+    <ul>
+        <li class="settings" style="cursor:pointer">Account Settings</li>  
+    </ul> 
+      
+    <br>
+    <h2>Session</h2>
+    <ul>
+        <p class="logout" onclick='logout2()' style="cursor:pointer">Logout</p>  
+    </ul>
+  </div> 
+    
+</div> 
+
+<footer>
+  <%- include('../partials/footer.ejs') %> 
+</footer> 
+
+<script>  
+function logout2() {
+    window.location.href = '/logout';
+}
+
+var ocart = document.getElementById('ocarts');
+ocart.onclick = ()=>{
+    window.location.href = '/checkout';
+}
+var logout = document.getElementById('logmeout');
+logout.onclick = ()=>{
+    window.location.href = '/logout';
+} 
+
+function serviceo() {
+    window.location.href = '/services';
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head.ejs'); %>
+    <style>
+        .container {
+            text-align: center;
+        }
+
+        .logo {
+            width: 100px; /* Adjust size as needed */
+            height: 100px; /* Ensure the height matches the width for a perfect circle */
+            border-radius: 50%; /* Make it circular */
+            margin-bottom: 20px;
+            animation: zoom 2s ease-in-out infinite alternate; /* Apply zoom animation */
+        }
+
+        .status {
+            font-size: 21px;
+            font-weight: bold;
+            color: green; /* Change color as needed */
+            margin-bottom: 20px;
+        }
+
+        .message {
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+
+        @keyframes zoom {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/header.ejs'); %>
+    <div class="container">
+        <img src="<%=adata.img%>" alt="Logo" class="logo">
+        <p class="status"><%=adata.greentext%></p>
+        <p class="message"><%=adata.text%></p>
+        <p class="message"><%=adata.textb%></p>
+    </div> 
+    <%- include('../partials/footer.ejs'); %>
+</body>
+</html>

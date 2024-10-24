@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f3f3f3; color: #fff;">
+    <table cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #000;">
+        <tr> 
+            <% var totalamount = 0; %>
+            <td align="center">
+                <table cellspacing="0" cellpadding="0" border="0" width="600" style="border-radius: 10px; background-color: #ffcc00;">
+                    <tr>
+                        <td align="center" style="background-color: #000; color: #ffcc00; padding: 10px; border-radius: 10px 10px 0 0;">
+                            <h1>Invoice</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #000; padding: 20px; border-radius: 0 0 10px 10px;">
+                            <img src="/images/onoscologo.jpg" alt="onoscologo" style="max-width: 150px; height: auto; margin: 0 auto; display: block;">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%"> 
+                                <tr>
+                                    <td colspan="2" style="margin-bottom: 20px;">Order Details</td>
+                                </tr>
+                                <tr>
+                                    <td>Order ID:</td>
+                                    <td><%=userpaymentdetails.orderid%></td>
+                                </tr>  
+                                <tr><td></td><td></td></tr>  <tr><td></td><td></td></tr><!-- Add empty row for spacing -->
+                                <tr>
+                                    <td>Transaction reference:</td>
+                                    <td><%=userpaymentdetails.txref%></td>
+                                </tr>
+                                <% userpaymentdetails.myServices.forEach(service => { %>
+                                <tr>
+                                    <td colspan="2" style="margin-bottom: 10px;">Service ID:</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><%= service._id %></td>
+                                </tr> 
+                                <tr><td></td><td></td></tr>
+                                <tr>
+                                    <td colspan="2" style="margin-bottom: 10px;">Service Name:</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><%= service.serviceName %></td>
+                                </tr> 
+                                <tr><td></td><td></td></tr>
+
+                                <tr>
+                                    <td colspan="2" style="margin-bottom: 10px;">Service Price:</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">€<%= service.servicePrice %></td>
+                                </tr> 
+                                <tr><td></td><td></td></tr>
+                                <% totalamount += service.servicePrice %>
+                                <% }); %>
+                                <tr>
+                                    <td colspan="2" style="margin-bottom: 10px;">Service Day & Session:</td>
+                                </tr> 
+                                <tr><td></td><td></td></tr>
+                                <tr>
+                                    <td colspan="2"><%= userpaymentdetails.day %> - <%= userpaymentdetails.session %></td>
+                                </tr>
+                                <tr><td></td><td></td></tr><!-- Add empty row for spacing -->
+                                <tr>
+                                    <td colspan="2" style="font-weight: bold; margin-top: 10px;">Total:</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">€<%=totalamount%></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="text-align: center; margin-top: 20px;">
+                            <p>Thank you for your business. For any inquiries, please contact us at onoscopsychotherapyservices@gmail.com.</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

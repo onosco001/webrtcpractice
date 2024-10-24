@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <%- include('../partials/head.ejs'); %> 
+      <title>Contact</title>
+   </head>
+   <!-- body -->
+   <body class="main-layout">
+      <!-- loader  -->
+      <div class="loader_bg">
+         <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+      </div>
+      <!-- end loader --> 
+      <!-- header --> 
+
+      <%- include('../partials/header.ejs'); %>
+
+      <div class="brand_color">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>Contact Us</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- contact -->
+    <div class="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <form id="contactForm" class="main_form">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                <input id="conname" class="form-control" placeholder="Your name" type="text" name="Your Name" required>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                <input id="conemail" class="form-control" placeholder="Email" type="text" name="Email" required>
+                            </div>
+                            <div class=" col-md-12">
+                                <input id="connum" class="form-control" placeholder="Phone" type="text" name="Phone" required>
+                            </div>
+                            <div class="col-md-12">
+                                <textarea id="conmsg" class="textarea" placeholder="Message" required></textarea>
+                            </div>
+                            <div class=" col-md-12">
+                                <button class="send">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end contact -->
+     
+      <!--  footer -->  
+      <%- include('../partials/footer.ejs'); %>
+      <!-- end footer -->
+      
+      <!-- Javascript files--> 
+      <script src="js/jquery.min.js"></script> 
+      <script src="js/popper.min.js"></script> 
+      <script src="js/bootstrap.bundle.min.js"></script> 
+      <script src="js/jquery-3.0.0.min.js"></script> 
+      <script src="js/plugin.js"></script> 
+      <!-- sidebar --> 
+      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script> 
+      <script src="js/custom.js"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script>
+         $(document).ready(function(){
+         $(".fancybox").fancybox({
+         openEffect: "none",
+         closeEffect: "none"
+         });
+         
+         $(".zoom").hover(function(){
+         
+         $(this).addClass('transition');
+         }, function(){
+         
+         $(this).removeClass('transition');
+         });
+         }); 
+
+
+         //handle contact submission
+         var contactForm = document.getElementById('contactForm');
+         contactForm.addEventListener('submit', async (e)=>{
+            e.preventDefault();
+            //change the button state
+            btn.textContent = 'Sending';
+            btn.style.opacity = 0.5;
+               var btn = document.querySelector('.send'); 
+               var conname = document.getElementById('conname').value;
+               var conemail = document.getElementById('conemail').value; 
+               var connum = document.getElementById('connum').value;
+               var conmsg = document.getElementById('conmsg').value;
+
+               const data = {
+                  name : conname,
+                  email : conemail,
+                  phoneNumber : connum,
+                  message : conmsg,
+               }
+               
+
+               try{
+              const response = await fetch('/contacting', {
+                 method : 'post',
+                 body : JSON.stringify(data),
+                 headers : {
+                     'Content-Type' : 'application/json',
+                      Accept : 'application/json',
+                 }
+              });
+
+              if(!response.ok){
+                throw response;
+              } 
+
+              //change the button state
+            btn.innerHTML = 'Sent';
+            btn.style.opacity = 2; 
+       }
+
+            catch(err){
+                const error = await err.text();
+                alert(error);
+            }
+         });
+         
+      </script> 
+   </body>
+</html>

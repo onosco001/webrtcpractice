@@ -1,0 +1,119 @@
+ 
+ 
+
+ 
+<!DOCTYPE html>
+<html>
+    <head>
+         <%- include('../partials/head.ejs') %> 
+         <title>Login</title> 
+
+         <style>
+
+           .errlogin{
+            font-family:'Poppins', sans-serif; 
+          }
+
+         </style>
+
+    </head>
+
+     <body> 
+  
+          <%- include('../partials/header.ejs') %> 
+ 
+         <div class="loginf">   
+         
+            <form id="leggo">   
+                    <i class="fa fa-user"></i> 
+                    <p class="bigg">Welcome back</p>  
+              <input id="logme" type="email" placeholder="Email" required>  
+              <input id="logpass" type="password" placeholder="Password" required>
+              <p id="errlogin"></p>
+              <button id="mlog">Log In</button>
+              <div class="forgotandcreate"> 
+                <a href='/signup'>Don't have an account?</a>
+                <br>
+                <a href="/reset-password">Forgot password?</a> 
+              </div> 
+              </form> 
+
+         </div>    
+
+         <%- include('../partials/footer.ejs') %> 
+         
+          <script>   
+
+
+var leggo = document.getElementById('leggo');
+leggo.addEventListener('submit', async (p)=>{
+     p.preventDefault();
+                
+
+                    let logme = document.getElementById('logme'); 
+                    let logpass = document.getElementById('logpass');
+                    let mlog = document.getElementById('mlog');
+                    let loginerror = document.getElementById('errlogin');
+                    mlog.innerHTML = 'Processing';
+                    mlog.style.opacity = '0.855';
+
+                    const logindata = {
+                      regemail : logme.value,
+                      regpass : logpass.value, 
+                    } 
+ 
+                    
+                 try{
+                    const response = await fetch('/logino', {
+                        method : 'post',
+                        body : JSON.stringify(logindata),
+                        headers : {
+                           'Content-Type' : 'application/json',
+                            Accept : 'application/json',
+                        },
+                    });
+                    
+                    if(!response.ok){
+                      mlog.innerHTML = 'Log In';
+                        throw response;
+                    }
+                    mlog.style.opacity = '1';
+                    const result = await response.json();
+                    loginerror.innerHTML = 'Login success'; 
+                    loginerror.style.color = 'green';
+                    loginerror.style.marginTop = '10px';
+                    loginerror.style.fontSize = '16px';
+                    loginerror.style.fontWeight = 'bold'; 
+
+                       
+                    setTimeout( ()=> {
+                      loginerror.innerHTML = 'waiting for redirect..'; 
+                 }, 1000);
+
+                    setTimeout( ()=> {
+                   window.location.href = '/dashboard';  
+                 }, 3000);
+
+                }
+
+
+                  catch(error){ 
+                    const errresult = await error.text(); 
+                    loginerror.innerHTML = errresult;
+                    loginerror.style.color = 'red';
+                    loginerror.style.marginTop = '10px';
+                    loginerror.style.fontSize = '16px';
+                    loginerror.style.fontWeight = 'bold'; 
+                  }  
+                   
+           });       
+
+        
+
+ 
+
+ 
+          </script>
+
+        </body>
+</html>

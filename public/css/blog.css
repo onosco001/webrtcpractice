@@ -1,0 +1,424 @@
+ 
+
+   .conf{
+    background-color:white;
+    margin-top:15px; 
+    width:100%; 
+    padding-top:0px;  
+    padding-bottom:5px; 
+    padding-left:20px;
+    padding-right:20px;  
+    animation-name:disp;
+    animation-duration:1.5s;
+    animation-iteration-count:1; 
+    border-top-left-radius:7px;
+    border-top-right-radius:7px;
+    border-bottom-left-radius:7px;
+    border-bottom-right-radius:7px;  
+ }    
+
+  .conf:hover{ 
+     border:2px solid white;
+  }
+
+
+
+
+  @keyframes disp{
+      
+   from{
+        margin-top:-300px;
+   }  
+
+    to{
+      margin-left:0px;
+    }
+
+  }
+
+  video{ 
+    border-top-left-radius:7px;
+    border-top-right-radius:7px;  
+  }   
+
+     .conf .title{  
+       font-family: "Poppins", sans-serif;
+       font-size:18px;  
+       padding-top:15px;
+       font-weight:bold;
+     }  
+
+     .conf .verse, .conf .author, .conf .date{ 
+       color:grey; 
+       padding-top:5px;  
+       font-family: "Poppins", sans-serif;
+       font-size:16px; 
+     }   
+
+     .pbody{ 
+       color:grey;  
+       padding-top:5px;
+       font-family: "Poppins", sans-serif;
+       font-size:17.3px; 
+     }     
+
+
+     #nocomment{ 
+       color:dodgerblue; 
+       padding-top:5px;
+       margin-top:7px;
+       margin-bottom:7px;
+       font-family: "Poppins", sans-serif;
+       font-size:16px; 
+       font-weight:bold;
+     }  
+
+     .encloseconf{
+           background-color:#fff;  
+           margin-top:35px; 
+           padding-top:55px;
+           padding-bottom:25px;  
+           margin-left:40px;
+           margin-right:40px;
+           padding-left:40px;
+           padding-right:40px; 
+           min-width:100px;    
+         }   
+
+
+
+
+    .commentenc{
+     min-width:100px;  
+      padding-bottom:40px;
+    }
+     
+
+
+  .comment textarea{
+         background:none;
+         color:black;
+         width:100%;
+         border:2px solid grey;
+         border-radius:5px; 
+         padding-top:12px;
+         padding-bottom:12px;
+         padding-left:10px;
+         padding-right:10px; 
+         height:140px;
+         margin-top:10px;
+
+      }      
+
+    .commentb button{ 
+     background-color:#f9be20;
+     color:#fff;
+     font-weight:bold;
+     font-size:18px; 
+     letter-spacing:1px;
+     font-family:Arial;
+     width:110px; 
+     margin-top:10px;
+     border-radius:3px;
+     border:none;
+     padding:8px;
+  }   
+
+  .commentb button:hover{
+   font-size:16px;
+  }
+             
+
+  h1{ 
+    text-align:left; 
+    color:#212121;
+    font-weight:bold;
+     font-size:18.1px;
+     font-family:'Poppins', sans-serif;
+     margin-top:50px;
+    } 
+
+    h2{ 
+    text-align:left; 
+    color:#212121;
+     font-size:17px;
+     font-family:'Poppins', sans-serif;
+     margin-top:50px;
+    } 
+
+
+
+
+
+.comments-container {
+max-width: 600px;
+margin: 20px auto; 
+max-height:400px;
+position:relative;
+overflow:scroll;
+}
+
+.acomment {
+background-color: #fff;
+border: 1px solid #ddd;
+border-radius: 8px;
+margin-bottom: 15px;
+position:relative;
+padding-left:20px;
+padding-right:20px;
+padding-top:25px;
+padding-bottom:14px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user p, .text p{ 
+font-family:'Poppins', sans-serif;
+margin-bottom: 10px;
+font-size:15px;
+margin-left:15px;
+color:grey; 
+}  
+
+.user p strong{
+color:dodgerblue;
+}     
+
+.user p span, .text p span{
+color:black;
+font-weight:bold;
+}   
+
+.text p strong{
+color:#f9be20;
+}
+
+
+.reply:hover{ 
+height:20px;
+padding-top:4px;
+padding-bottom:20px; 
+font-size:14px;
+}    
+
+.repcon input, .repcon button{ 
+margin-left:20px;
+border-radius:5px;
+cursor:pointer;
+} 
+
+.repcon{  
+display:flex;  
+margin-top:25px;
+padding-right:10px;
+justify-content:space-between;  
+left:0; 
+right:0;
+width:100%; 
+animation-name:reply;
+animation-duration:1.5s;
+animation-iteration-count:1; 
+background-color:white;
+
+}  
+
+.repcon input{
+border:none;
+background-color:none;
+width:60%;
+background-color:white;
+box-shadow : 0px 2px 4px 0px rgba(0,0,0.2); 
+outline:none;
+padding:12px;
+} 
+
+.repcon i{
+font-size:25px;
+color:#f9be20;
+margin-left:40px;
+margin-top:13px;
+font-weight:bold;  
+}     
+
+.repcon button{
+background:none;
+border:none;
+} 
+
+
+@keyframes reply{
+from{
+margin-bottom:-300px;
+} 
+
+to{
+margin-bottom:0px;
+}
+} 
+
+
+
+/* related posts */
+
+
+.related-posts {
+min-width:100px; 
+position:relative; 
+padding-left:40px;
+padding-right:40px;
+padding-top:30px;
+padding-bottom:20px;
+margin-left:40px;
+margin-right:40px;
+margin-top:10px;
+background-color: #fff; 
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+} 
+
+h3{ 
+    text-align:left; 
+    color:#212121;
+     font-size:19px;
+     margin-left:40px;
+     font-family:'Poppins', sans-serif;
+     margin-top:24px;
+    } 
+
+
+.post-card {
+margin-bottom: 20px;
+padding: 15px;
+background-color: #fff;
+border-radius: 8px; 
+display:flex; 
+width:100%;
+justify-content:space-between;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-card video{
+width:100%; 
+height:auto;
+margin-top:10px;
+border-radius:7px;
+border-radius: 4px;
+}
+
+.post-card .pt{
+font-size: 1.2em;
+margin-top: 10px;
+}
+
+.post-card p {
+color: #555; 
+font-size:16px; 
+font-family:'Poppins', sans-serif;
+margin-bottom:7px;
+}
+
+.read-more {
+display: inline-block;
+padding:9px;
+border:none;
+font-weight:bold;
+font-family:'Poppins', sans-serif;
+background-color:dodgerblue;
+color: #fff;
+text-decoration: none;
+border-radius: 4px;
+width:100px;
+transition: background-color 0.3s;
+}
+
+.read-more:hover {
+background-color: #2980b9;
+}
+
+
+.access{
+top:0;
+display:flex; 
+justify-content:right;
+padding-left:20px;
+padding-right:20px;
+padding-top:20px;
+padding-bottom:20px;
+background-color:white;
+}  
+
+
+.access button{ 
+     background-color:#f9be20;
+     color:#fff;
+     font-weight:bold;
+     font-size:16px; 
+     letter-spacing:1px;
+     font-family:Arial;
+     width:170px; 
+     margin-right:10px;
+     margin-top:10px;
+     border-radius:3px;
+     border:none;
+     padding:8.5px;
+  }   
+
+
+
+  @media only screen and (max-width:490px) {
+        .post-card video{
+         display:none;
+        } 
+
+        .post-card p{
+             text-align:left;
+        }
+
+   }
+
+
+ 
+
+@media only screen and (max-width:889px) {
+       .encloseconf{   
+           margin-left:20px;
+           margin-right:20px;
+           padding-left:10px;
+           padding-right:10px;    
+         }   
+
+         .conf{
+           padding-left:10px;
+           padding-right:10px;
+         }
+       }
+
+
+
+    @media only screen and (min-width:890px) {
+
+       .encloseconf{
+     display:flex;
+     justify-content:space-between; 
+    }    
+
+    .related-posts{ 
+        display:flex;
+       justify-content:space-between;
+       overflow:scroll;
+    }  
+
+     .post-card{
+       margin-right:20px;
+     }
+
+    .sectiona, .sectionb{
+     width:100%;
+     padding-left:20px;
+     padding-right:20px;
+    }
+
+    .comment textarea{
+     width:100%; 
+    }
+
+   }

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <%- include('../partials/head.ejs'); %>
+      <title>Onosco blog</title>  
+
+      <style>
+        .news-box:hover{
+            opacity : 0.778;
+        }
+      </style>
+   </head>
+   <!-- body -->
+   <!---blogpost is representing all blogpost in this page-->
+   <body class="main-layout">
+      <!-- loader  -->
+      <div class="loader_bg">
+         <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+      </div>
+      <!-- end loader --> 
+
+      <%- include('../partials/header.ejs'); %>
+ 
+       <div class="brand_color">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>blog</h2>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div> <br>
+
+     <!-- Latestnews --> 
+                    <div class="titlepage"> 
+                        <p>Latest News</p>
+                    </div>
+               
+
+       
+         <div class="griding"> 
+          <% blogpost.forEach(each=>{ %> 
+                <a href="<%=`onosco-blog/${each._id}`%>">
+                        <div class="news-box">
+                        <img height=150px" src="/<%=each.postImage.path%>" alt="img" />
+                        <div class="fle">
+                        <h3><%= each.posttitle %></h3> 
+                        <% const posteddate = new Date(each.date)%>
+                        <% const year = posteddate.getFullYear(); %>
+                        <% const month = posteddate.toLocaleString('en-US', {month : 'long' }) %>
+                        <% const day = posteddate.getDate(); %>
+                        <span> <%= month + '-' + day + ' ' + year %> </span>
+                        </div>
+                        <p><%= each.postbody.length > 200 ? `${each.postbody.substring(0, 150)}...` : each.postbody.length %></p>
+   
+                    </div>  </a> 
+                   <% }) %>  
+        </div>
+   
+    <!-- end Lastestnews -->
+
+      <!--  footer -->  
+      <%- include('../partials/footer.ejs'); %>
+      <!-- end footer -->
+
+      <!-- Javascript files--> 
+      <script src="js/jquery.min.js"></script> 
+      <script src="js/popper.min.js"></script> 
+      <script src="js/bootstrap.bundle.min.js"></script> 
+      <script src="js/jquery-3.0.0.min.js"></script> 
+      <script src="js/plugin.js"></script> 
+      <!-- sidebar --> 
+      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script> 
+      <script src="js/custom.js"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script>
+         $(document).ready(function(){
+         $(".fancybox").fancybox({
+         openEffect: "none",
+         closeEffect: "none"
+         });
+         
+         $(".zoom").hover(function(){
+         
+         $(this).addClass('transition');
+         }, function(){
+         
+         $(this).removeClass('transition');
+         });
+         });
+         
+      </script> 
+   </body>
+</html>

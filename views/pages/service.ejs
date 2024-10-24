@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head> 
+      <%- include('../partials/head.ejs'); %>
+      <title>Service</title>
+   </head>
+   <!-- body -->
+   <body class="main-layout product_page">
+      <!-- loader  -->
+      <div class="loader_bg">
+         <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+      </div>
+      <!-- end loader --> 
+      <!-- header -->
+      <%- include('../partials/header.ejs'); %>
+      <!-- end header -->
+       <div class="brand_color">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>our services</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+      <!-- our Service -->
+      <div class="product">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="title"> 
+                     <span>We offer the best services to make you a happy customer.</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+      <div class="product-bg usercon" auser = '<%=user%>'>
+         <div class="product-bg-white">
+         <div class="container"> 
+            <div class="griding"> 
+            <% services.forEach(each=>{ %>
+                  <div class="product-box" ouser ='<%=JSON.stringify(user)%>'>
+                      <img src="/<%=each.serviceImage.path%>"> 
+                     <h3><%=each.serviceName%></h3>
+                     <span>€<%=each.servicePrice%></span> <br> 
+                     <div class='thebutton'>
+                      <button class="cartaddedbb" serviceid="<%=each._id%>">Add to cart</button> 
+                     <% if(user && user.role === 'admin'){ %>
+                         <button class="adminacc" ouser ='<%=JSON.stringify(user)%>' serviceid="<%=each._id%>">Edit Service</button>
+                    <% } %>
+                        </div> 
+                </div>  
+              <% }); %>
+               </div>
+               </div>
+            </div>
+         </div>
+         
+    
+      <!--  footer -->  
+      <%- include('../partials/footer.ejs'); %>
+      <!-- end footer -->
+      
+      <!-- Javascript files--> 
+      <script src="js/jquery.min.js"></script> 
+      <script src="js/popper.min.js"></script> 
+      <script src="js/bootstrap.bundle.min.js"></script> 
+      <script src="js/jquery-3.0.0.min.js"></script> 
+      <script src="js/plugin.js"></script> 
+      <!-- sidebar --> 
+      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script> 
+      <script src="js/custom.js"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script>
+         $(document).ready(function(){
+         $(".fancybox").fancybox({
+         openEffect: "none",
+         closeEffect: "none"
+         });
+         
+         $(".zoom").hover(function(){
+         
+         $(this).addClass('transition');
+         }, function(){
+         
+         $(this).removeClass('transition');
+         });
+         });  
+           
+      
+         //add cart
+         var carts = document.querySelectorAll('.cartaddedbb');
+for (var i = 0; i < carts.length; i++) {
+    carts[i].onclick = async function () { 
+       
+         var uc = document.querySelector('.usercon');
+         var ouser = uc.getAttribute('auser');
+
+          if(!ouser){
+             alert('This action requires you to login first');
+          }  else {
+
+        const serviceIds = this.getAttribute('serviceid');
+
+        const data = {
+            cartId: serviceIds,
+        };
+
+        try {
+            const rescart = await fetch('/postcart', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+            });
+            if (!rescart.ok) {
+                throw rescart;
+            }
+ 
+            var msg = document.getElementById('displaymessage');
+            msg.style.display = 'block';
+            msg.innerHTML = 'Added to cart...View carts in dashboard';
+            // Remove the success message
+            setTimeout(() => {
+                msg.style.animationName = 'msgdisappear';
+                msg.style.animationDuration = '5s';
+                msg.style.animationIterationCount = '1';
+            }, 2000);
+            setTimeout(() => {
+                msg.style.display = 'none';
+            }, 3000);
+        } catch (err) {
+            const error = await err.text;
+            alert('Unable to add to cart');
+        } 
+    }
+    };
+} 
+
+         
+ 
+var serviceedit = document.querySelectorAll('.adminacc');   
+serviceedit.forEach(each=>{    
+var userhere = each.getAttribute('ouser');  
+var theuser = JSON.parse(userhere);  
+   
+    if (theuser && theuser.role === 'admin') {
+        each.onclick =  function (e) { 
+        window.location.href = `onosco-service/${e.target.getAttribute('serviceid')}`;
+    } 
+}
+     
+    }); 
+    
+     
+ 
+      </script> 
+   </body>
+</html>

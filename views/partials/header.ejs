@@ -1,0 +1,152 @@
+ 
+
+ <!-- header --> 
+    <!-- header inner --> 
+       <div class="headtop" theuser = '<%=JSON.stringify(user)%>'>  
+         <div>
+                   <a href="#"><i class="fa fa-facebook-f"></i></a> 
+                 <a href="#"><i class="fa fa-twitter"></i></a> 
+                  <a href="#"><i class="fa fa-instagram"></i></a> 
+                 <a href="#"><i class="fa fa-linkedin"></i></a>  
+        </div>  
+                   <p>Onosco psychotherapy services</p> 
+       
+    </div>  <br> <br>  <br>
+
+    <div id="displaymessage"></div>
+    
+   <div class="fm">
+           <div class="flexme">   
+                        <img src="/images/logo.jpg" alt="logo"/>
+                          <a href="/">Home</a>  
+                        <a href="/about">About</a> 
+                          <a href="/services">Service</a> 
+                         <a href="/onosco-blog"> Blog</a> 
+                         <a href="/contact">Contact</a>  
+                         <i onclick='drdo()' class="fa fa-bars"></i> 
+ 
+                        <% if(user && user.role === 'admin'){ %>
+                        <a class="dashpro" href="/dashboard"><button>My Account</button></a>
+                        <button class="postblog" onclick="postblog()">Create a post</button>
+                        <button class="postservicea" onclick="postservicea()">Add a service</button>
+                       <% } else if(user){ %>
+                        <button onclick = "dashboardgo()">My Account</button>
+                        <% } else { %> 
+                        <a href="/signup" id="sp">Signup</a>   
+                        <button id="laplog" onclick="login()">Login</button>
+                        <% } %>    
+                         
+             </div> 
+                 
+                  <!---Android navigation---->
+                  <div class="navi">
+                     <a href="/">Home</a>  <hr> 
+                     <a href="/about">About</a>  <hr> 
+                       <a href="/services">Service</a>  <hr> 
+                      <a href="/onosco-blog"> Blog</a> <hr> 
+                      <a href="/contact">Contact</a>  <hr>    
+                       
+                       <% if(user && user.role === 'admin'){ %>
+                       <a class="dashproa" href="/dashboard">My Account</a>
+                       <button class="postbloga" onclick="postbloga()">Create a post</button>
+                       <button class="postservice" onclick="postservice()">Add a service</button>
+                       <% } else if(user){ %> 
+                        <a class="dashproa" href="/dashboard">My Account</a>
+                        <% } else { %>  
+                       <a class="spa" href="/signup">Signup</a>  
+                       <a class="spa" href="/login">login</a>  
+                        <% } %>    
+                     </div>
+                   <!---Android navigation end---->
+   </div>
+        
+
+    <!-- end header inner -->  
+ <!-- end header -->  
+
+
+ <script> 
+ 
+ 
+     function login() {
+            window.location.href = '/login';    
+     }    
+
+     function loginbb() {
+            window.location.href = '/login';    
+     }   
+     
+     
+      var nav = document.querySelector('.navi');
+      nav.style.height = '0px';  
+     function drdo(x) {  
+      if( nav.style.height == '0px'){
+         nav.style.height = '400px';
+         x.event.classList.toggle('fa-times');  
+      } else {  
+         nav.style.height = '0px';  
+      }
+       
+   }   
+
+     
+   var dash = document.querySelector('.dashpro'); 
+   var dasha = document.querySelector('.dashproa'); 
+      var ht = document.querySelector('.headtop');
+  var userString = ht.getAttribute('theuser');
+  var myuser = JSON.parse(userString);
+  var saap = document.querySelector('#sp');
+  var spa = document.querySelector('.spa');
+  var lal = document.querySelector('#laplog');
+  var pbl = document.querySelector('.postblog');
+  var psva = document.querySelector('.postservicea');
+  var psv = document.querySelector('.postservice');
+  var pbla = document.querySelector('.postbloga');
+  if(myuser){
+   dash.innerHTML = 'My Account'; 
+   dasha.innerHTML = 'My Account'; 
+   saap.style.display= 'none';
+   spa.style.display= 'none';
+   lal.style.display= 'none'; 
+  } else if(myuser && myuser.role == 'admin') { 
+      pbl.innerHTML = 'Create a post';
+      pbla.innerHTML = 'Create a post';
+      psv.innerHTML = 'Add a service';
+      psva.innerHTML = 'Add a service';
+       }  else {
+   dash.style.display = 'none'; 
+   dasha.style.display = 'none';   
+   pbl.style.display= 'none';
+   pbla.style.display= 'none';
+   psv.style.display= 'none';
+   psva.style.display= 'none';
+   saap.innerHTML = 'Sign up';
+   spa.innerHTML = 'Sign up';
+   lal.innerHTML = 'Login'; 
+  }      
+
+      function postblog(){
+           window.location.href = '/admin-control';
+      }  
+
+      function postbloga(){
+         window.location.href = '/admin-control';
+      }  
+
+      function postservicea(){
+         window.location.href = '/admin-control-service';
+      } 
+
+       function postservice(){
+         window.location.href = '/admin-control-service';
+      }  
+
+
+      function dashboardgo() {
+          window.location.href = '/dashboard';
+      }
+ 
+  
+
+ </script>
+ 

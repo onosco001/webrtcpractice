@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head.ejs'); %>
+</head>
+<body> 
+    <%- include('../partials/header.ejs'); %>
+    <div class="postcontent">   
+        <!----------categories---------------->
+        <p class="bigg">Upload a service</p> 
+        <form id="postar" enctype="multipart/form-data">     
+            <input id="sname" type="text" placeholder="service name" required>  
+            <input id="price" type="text" placeholder="service price" required>
+            <input id="description" type="text" placeholder="service description" required> 
+            <input type="file" id='adminfile' accept="image/*"  name='serviceImage' required>
+            <button class="postbut" type="submit"><p id="postingg">Upload</p></button>  
+        </form>      
+    </div>     
+    <script>
+        var postar = document.getElementById('postar'); 
+        postar.addEventListener('submit', async (event)=>{
+            const pb = document.querySelector('.postbut'); // Selecting by class instead of ID
+            event.preventDefault(); 
+            var postingg = document.getElementById('postingg');
+            postingg.innerHTML = 'Uploading...';
+            pb.style.opacity = '0.855';
+            const sname = document.getElementById('sname').value; 
+            const price = document.getElementById('price').value;
+            const description = document.getElementById('description').value;
+            const admfile = document.getElementById('adminfile').files[0];
+            const data = new FormData();
+            data.append('serviceName', sname); 
+            data.append('servicePrice', price);
+            data.append('serviceDescription', description);
+            data.append('serviceImage', admfile); 
+            try {
+                const resp = await fetch('/postingservice', { 
+                    method :'POST',
+                    body : data,   
+                });
+                if (!resp.ok) { 
+                    throw resp;
+                }   
+                pb.style.opacity = '1';
+                setTimeout(() => {  
+                    postingg.innerHTML = 'Uploaded';
+                }, 4000);
+                setTimeout(() => { 
+                    postingg.innerHTML = 'Upload'; // Revert button text back to "Upload"
+                    location.reload();
+                }, 6000); 
+            } catch (err) {
+                const error = await err.text();
+                console.log(error);
+                alert('Error processing!');
+                location.reload();
+            }    
+        });  
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+   
+    <!DOCTYPE html>
+    <html lang="en">
+       <head>
+         <%- include('../partials/head.ejs'); %>
+         <title>About</title>
+       </head>
+   <body class="main-layout">
+      <!-- loader  -->
+      <div class="loader_bg">
+         <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+      </div>
+      <!-- end loader --> 
+      <%- include('../partials/header.ejs'); %>
+       <div class="brand_color">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>about</h2>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+
+<div class="about">
+   <div class="container">
+      <div class="row">
+         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+            <div class="about_box">
+               <figure><img src="images/abt1.jpg"/></figure>
+            </div>
+         </div>
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+            <div class="about_box">
+               <h3>About Onosco</h3>
+               <p>
+                  Onosco psychotherapy services is a company founded by Alex Onome Aroh in 2024.
+                  He speaks the following languages. English, Urhobo and Edo language.
+                  Alex Onome Aroh is a christain who is married with children. His education background states that, He obtained <b>BSc</b> in <b>Psychology</b>
+                  and <b>MSc</b> in <b>Psychotherapy.</b> 
+               </p>  
+               <p><strong>School attended:</strong> Dublin City University (DCU)</p>
+               <p><b>Church address</b>: 23 Dublin Street, Balbriggan,
+                   Co. Dublin ireland</p>  
+                 <p><b>Nationality</b>: Black Irish</p>
+                 <p><b>Additional speciality</b>: Working with people with Autism, ADHD, OCD and ODD. </p>
+            </div>
+         </div> 
+      </div>
+   </div>
+</div>    
+
+<div class='gridding'>
+   <img src="images/abt2.jpg"/>
+   <img src="images/abt3.jpg"/>
+   <img src="images/abt4.jpg"/> 
+</div>
+
+<!-- CHOOSE  -->
+<%- include('../partials/whychoose.ejs'); %>
+<!-- end CHOOSE -->
+
+      <!-- service --> 
+      <%- include('../partials/serviceprocess.ejs'); %>
+      <!-- end service --> 
+       
+      <!--  footer -->  
+      <%- include('../partials/footer.ejs'); %>
+      <!-- end footer -->
+      
+      <!-- Javascript files--> 
+      <script src="js/jquery.min.js"></script> 
+      <script src="js/popper.min.js"></script> 
+      <script src="js/bootstrap.bundle.min.js"></script> 
+      <script src="js/jquery-3.0.0.min.js"></script> 
+      <script src="js/plugin.js"></script> 
+      <!-- sidebar --> 
+      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script> 
+      <script src="js/custom.js"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script>
+         $(document).ready(function(){
+         $(".fancybox").fancybox({
+         openEffect: "none",
+         closeEffect: "none"
+         });
+         
+         $(".zoom").hover(function(){
+         
+         $(this).addClass('transition');
+         }, function(){
+         
+         $(this).removeClass('transition');
+         });
+         });
+         
+      </script> 
+   </body>
+</html>

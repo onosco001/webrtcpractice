@@ -1,0 +1,262 @@
+  
+   
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <%- include('../partials/head.ejs'); %>
+    <title>Service Cart</title>
+    <style>
+    
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    } 
+ 
+        /* Styles for the shopping cart */
+        .cart {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom:40px;
+            min-width:100px;
+            margin-left:10px;
+            padding-left:20px;
+            padding-right:20px;
+            margin-right:10px;
+        }
+        .cart h2 {
+            text-align: center;
+            margin-top:20px;
+            margin-bottom:25px;
+        }
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .cart-header > div {
+            flex: 1;
+            font-weight: bold;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding: 5px 0;
+            margin-bottom: 5px;
+        }
+        .cart-item > div {
+            flex: 1;
+        }
+        .edit-delete-btns {
+            display: flex;
+            gap: 5px;
+        }
+        .edit-btn, .delete-btn {
+            padding: 5px 10px;
+            background-color:white;
+            box-shadow:#ddd 0px 0px 10px 3px;
+            color:black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color:#ffbe20;
+            color: #fff;
+            border: none;
+            margin-top:15px; 
+            font-weight:bold;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+        }
+        
+         .checkout-btn:hover{
+            background-color:black;
+         }
+    
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            .cart {
+                padding-left:20px;
+                padding-right:20px;
+                padding-bottom:15px;
+            }
+            .cart-header, .cart-item {
+                flex-direction: column;
+            }
+            .cart-header > div {
+                flex: none;
+                width: 100%;
+            }
+        }
+        
+        @media only screen and (min-width:769px) {
+             .cart{
+                  
+                  margin-left:100px;
+                  margin-right:100px;
+             }
+        }
+    </style>
+    </head> 
+    
+    <body> 
+
+         <!-- loader  -->
+      <div class="loader_bg">
+        <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+     </div>
+     <!-- end loader --> 
+
+     <%- include('../partials/header.ejs') %>  
+
+     <% if(myCarts && myCarts.length > 0) { %> 
+    <div class="cart">
+        <h2>Service Cart</h2>
+        <div class="cart-header">
+            <div>Service</div>
+            <div>Price</div>
+            <div>Session</div>
+            <div>Day</div>
+            <div>Duration</div> 
+            <div>Action</div>
+        </div>  
+        <!-- Initialize totalPayment -->
+        <% var totalPayment = 0; %> 
+   <% myCarts.forEach(each=>{ %> 
+        <div class="cart-item">  
+            <input class="servid" type="text" value="<%= each.service._id %>" hidden>
+            <div><%=each.service.serviceName%></div>
+            <div>€<%=each.service.servicePrice%></div>
+            <div><%=each.session%></div>
+            <div class="dday"><%=each.day%></div>
+            <div class="ssen"><%=each.duration%></div> 
+            <div class="edit-delete-btns">
+                <a href='<%=`checkout-edit/${each._id}`%>'><button class="edit-btn">Edit</button></a>
+                <a href='<%=`checkout-delete/${each._id}`%>'><button class="delete-btn">Delete</button></a>
+            </div>
+        </div>   
+        <% totalPayment += each.service.servicePrice; %> 
+   <% })%> 
+    
+   <% ttotalPayment = totalPayment.toFixed(2) %>
+   <p>Your total payment is: €<%= ttotalPayment %></p> 
+        
+   <button id="paymentButton" class="checkout-btn" onclick="initializePayment()">Checkout</button> 
+ </div> 
+    
+     <input class='amount' type="text" value="<%=ttotalPayment%>" hidden>
+  <% } else { %> 
+    <div style='padding-left:20px; padding-right:20px; margin-bottom:20px; min-width:100px; text-align:center;'>
+        <p style="font-size:21px; font-family:'Poppins', sans-serif;">No carts found. Please Explore our provided services at</p> <br>
+         <a style="color:dodgerblue" href='/services'>Onosco Psychotherapy Services</a>
+ <% } %> 
+    </div>
+
+    <%- include('../partials/footer.ejs'); %>  
+    <script src="js/jquery.min.js"></script> 
+    <script src="js/popper.min.js"></script> 
+    <script src="js/bootstrap.bundle.min.js"></script> 
+    <script src="js/jquery-3.0.0.min.js"></script> 
+    <script src="js/plugin.js"></script> 
+    <!-- sidebar --> 
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script> 
+    <script src="js/custom.js"></script>
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <script>
+       $(document).ready(function(){
+       $(".fancybox").fancybox({
+       openEffect: "none",
+       closeEffect: "none"
+       });
+       
+       $(".zoom").hover(function(){
+       
+       $(this).addClass('transition');
+       }, function(){
+       
+       $(this).removeClass('transition');
+       });
+       }); 
+ 
+
+         //initialize the payment here 
+         async function initializePayment() {
+    const button = document.getElementById('paymentButton');
+    button.innerHTML = 'Processing';
+    button.disabled = true;
+    button.style.opacity = '0.786';
+    const amnt = document.querySelector('.amount').value;
+    const dday = document.querySelectorAll('.dday');
+    const dsession = document.querySelectorAll('.ssen');
+    const allServiceIds = document.querySelectorAll('.servid');
+    const allofservice = [];
+    const allofday = [];
+    const allofsession = [];
+    for(var i = 0; i<allServiceIds.length; i++){
+        allofservice.push(allServiceIds[i].value);
+    }   
+
+    for(var k = 0; k<dday.length; k++){
+        allofday.push(dday[k].textContent);
+    }    
+
+    
+    for(var b = 0; b<dsession.length; b++){
+        allofsession.push(dsession[b].textContent);
+    }   
+
+    const data = {
+        amount: amnt,
+        orderedServices : allofservice,
+        day : allofday,
+        session: allofsession
+    };
+    
+    try {
+        const resp = await fetch('/processingpayment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(data),
+        });  
+
+        if (!resp.ok) {
+            throw resp;
+        }  
+ 
+        button.disabled = false;
+        button.style.opacity = '1';
+        
+        const result = await resp.json();
+        window.location.href = result.redirectUrl; // Redirect to the received URL
+    } catch (err) {
+        const error = await err.text();
+        alert(error);
+        button.innerHTML = 'Checkout';
+        button.disabled = false;
+        button.style.opacity = '1';
+        location.reload(); // Reload the page on error
+    }
+}
+
+
+
+       
+    </script> 
+
+    </body>
+    </html>
+    

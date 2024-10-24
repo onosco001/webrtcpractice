@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head> 
+      <%- include('../partials/head.ejs'); %>
+      <title>Home</title>
+   </head>
+   <!-- body -->
+   <body class="main-layout">
+      <!-- loader  -->
+      <div class="loader_bg">
+         <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+      </div>
+      <!-- end loader --> 
+
+      <%- include('../partials/header.ejs') %>  
+
+      <section class="slider_section">
+         <div id="main_slider" class="carousel slide banner-main respcaro" data-ride="carousel">
+           <div class="carousel-inner">
+
+            <div class="carousel-item active">
+
+               <div class="flexing"> 
+                <div class="container"> 
+                      <h1>Onosco<br> <strong class="black_bold">Psychotherapy</strong><br>
+                         <strong class="yellow_bold">Services</strong></h1>
+                      <p>Book a service today and let's help to regulate your Psychotherapy status<br>
+                      Your healthiness is our priority</p>
+                      <button onclick='bookaa()' class="booking">Book a service</button>
+                   </div> 
+                <div>
+                  <img src="/images/psych.png" alt="first slide">
+                  </div> 
+                   </div>
+
+                </div> 
+
+
+                <div class="carousel-item">
+                  <div class="flexing"> 
+                   <div class="container"> 
+                         <h1>Onosco<br> <strong class="black_bold">Psychotherapy</strong><br>
+                            <strong class="yellow_bold">Services</strong></h1>
+                         <p>We are commited to working with you every step of the way
+                           on your journey towards healing and wellness
+                         </p>
+                         <button onclick='bookbb()' class="booking">Book a service</button>
+                      </div>
+                      <div>
+                        <img src="/images/psych2.png" alt="second slide">
+                        </div> 
+                      </div>
+                   </div>
+
+
+                   <div class="carousel-item">
+                     <div class="flexing"> 
+                      <div class="container"> 
+                            <h1>Onosco<br> <strong class="black_bold">Psychotherapy</strong><br>
+                               <strong class="yellow_bold">Services</strong></h1>
+                            <p>You don't have to face your challenges alone. We're here to support you</p>
+                            <button onclick='bookcc()' class="booking">Book a service</button>
+                         </div>
+                         <div>
+                           <img src="/images/psych3.png" alt="Third slide">
+                           </div> 
+                      </div>
+                  </div>
+            </div> 
+              </div>
+ 
+            
+         </div>
+
+      </section>
+
+
+
+<!-- CHOOSE  -->
+<%- include('../partials/whychoose.ejs'); %>
+<!-- end CHOOSE -->
+
+      <!-- service --> 
+      <%- include('../partials/serviceprocess.ejs'); %>
+      <!-- end service -->
+ 
+ 
+     <!------<div class="product-bg">
+         <div class="product-bg-white">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12"> 
+           <div class="product-box">
+                     <i><img src="/images/abt1.jpg"/></i>
+                     <h3>Individual Therapy</h3>
+                     <span>£25.00</span>
+                     <button class="cartadded">Add to cart</button> 
+                  </div>
+               </div>
+               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                  <div class="product-box">
+                     <i><img src="/images/abt1.jpg"/></i>
+                     <h3>Couples Therapy</h3>
+                     <span>£50.00</span>
+                      <button class="cartadded">Add to cart</button> 
+                  </div>
+               </div>
+               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                  <div class="product-box">
+                     <i><img src="/images/abt1.jpg"/></i>
+                     <h3>Family System Therapy</h3>
+                     <span>£75.00</span>
+                     <button class="cartadded">Add to cart</button> 
+                  </div>
+               </div>   
+               </div>
+            </div>
+         </div>-----> 
+       
+         <div class="Clients_bg_white">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="title">
+                        <h3>What Clients Say?</h3>
+                     </div>
+                  </div>
+               </div>
+               <div id="client_slider" class="carousel slide banner_Client" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#client_slider" data-slide-to="0" class="active"></li>
+          <li data-target="#client_slider" data-slide-to="1"></li>
+          <li data-target="#client_slider" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="container">
+              <div class="carousel-caption text-bg">
+               <div class="img_bg">
+                  <i><img src="images/onoscologo.jpg"/><span>Michael James<br><strong class="date">12/02/2023</strong></span></i>
+                  
+               </div>
+                
+                <p>Partnering with the Onosco Psychotherapy Services team has been a game-changer for me. Their compassionate care and deep understanding of mental health have guided me through challenging moments, empowering me with tools and insights for personal growth. Their unwavering support has been instrumental in my journey towards emotional well-being, and I couldn't be more thankful for their expertise and dedication.</p>
+                
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="container">
+              <div class="carousel-caption text-bg">
+                <div class="img_bg">
+                  <i><img src="images/onoscologo.jpg"/><span>Justin Peter<br><strong class="date">12/02/2019</strong></span></i>
+                  
+               </div>
+                <p>I've been working with the Onosco Psychotherapy Services team for several months now, and I can honestly say it's been life-changing. Their compassionate approach, combined with their expertise in mental health, has helped me navigate some of the toughest challenges I've faced. Through therapy sessions tailored to my needs, I've gained valuable insights, coping strategies, and a renewed sense of hope. I'm incredibly grateful for their support and guidance on my journey towards healing.</p>
+                
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="container">
+              <div class="carousel-caption text-bg">
+                 <div class="img_bg">
+                  <i><img src="images/onoscologo.jpg"/><span>Brian Hill<br><strong class="date">04/02/2024</strong></span></i>
+                  
+               </div>
+                <p>Working with the Onosco Psychotherapy Services team has been truly transformative. Their compassionate guidance and expertise in mental health have provided me with invaluable support during some of my toughest times. Through tailored therapy sessions, I've gained insights, coping strategies, and a renewed sense of hope. I'm deeply grateful for their commitment to my healing journey.</p>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+            </div>
+         </div>
+
+         <div class="container">
+            <div class="yellow_bg">
+            <div class="row">
+               <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12">
+                  <div class="yellow-box">
+                     <h3>REQUEST A FREE ADVICE<i><img src="icon/calll.png"/></i></h3>
+                     
+                     <p>Get answers and advice from an expert today</p>
+                  </div>
+               </div>
+                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
+                  <div class="yellow-box">
+                     <a href="/">Get Advice</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         </div>
+      </div>
+
+      <!-- end our product -->
+      <!-- map -->
+      <div class="container-fluid padi">
+         <div class="map">
+            <img src="images/mapimg.jpg" alt="img"/>
+         </div>
+      </div>
+      <!-- end map --> 
+      
+       
+<!-- The terms and services pop-up div -->
+<div id="termsPopup" style="position: fixed; bottom: -100%; left: 0; width: 100%; background-color: #f0f0f0; padding: 20px; box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); transition: bottom 0.5s ease;">
+   <p>Welcome to our website
+! Before proceeding, please read and agree to our <a id="termsLink" href="#" style="color: blue; text-decoration: underline; cursor: pointer;">Terms and Services</a>. <span id="closeIcon" style="cursor: pointer;">✖</span></p>
+
+   <div style="margin-top: 10px;">
+      <button id="denyButton" style="background-color: red; color: white; padding: 10px 20px; border: none; cursor: pointer; margin-right: 10px;">Deny</button>
+      <button id="agreeButton" style="background-color: green; color: white; padding: 10px 20px; border: none; cursor: pointer;">Agree</button>
+   </div>
+</div>
+
+
+  
+      <!--  footer -->  
+      <%- include('../partials/footer.ejs'); %>
+      <!-- end footer -->  
+
+      <!-- Javascript files-->  
+
+      <script> 
+
+      function bookaa(){
+         window.location.href = '/services';
+      } 
+
+      function bookbb(){
+         window.location.href = '/services';
+      }
+
+
+      function bookcc(){
+         window.location.href = '/services';
+      }  
+
+      function bookdd(){
+         window.location.href = '/services';
+      }  
+
+
+      
+
+          var cts = document.querySelectorAll('.cartadded');
+         cts.forEach(eachct=>{ 
+            const serviceids = eachct.getAttribute('serviceId'); 
+         eachct.onclick = async function() {
+            
+              try{
+             const rescart = await fetch('/postcart', {
+                 method : 'post',
+                 body : serviceids,
+             }); 
+             if(!rescart.ok){
+                throw rescart
+            } 
+
+             var msg = document.getElementById('displaymessage');
+             msg.style.display = 'block';
+             msg.innerHTML = 'Added to cart...View carts in dashboard'; 
+             //remove the success message
+         setTimeout(()=>{ 
+             var msg = document.getElementById('displaymessage');  
+             msg.style.animationName = 'msgdisappear';
+             msg.style.animationDuration = '5s';
+             msg.style.animationIterationCount = '1';  
+        }, 2000);   
+        setTimeout(()=>{ 
+             var msg = document.getElementById('displaymessage'); 
+             msg.style.display = 'none';  
+        }, 3000); 
+          
+      }
+
+              catch(err){
+                  const error = await err.text; 
+                  alert('Unable to add to cart'); 
+                }
+         }
+                  
+      });     
+
+ 
+    // JavaScript to handle the terms and services pop-up
+
+    // Get the terms pop-up div
+    const termsPopup = document.getElementById('termsPopup');
+
+    // Get the close icon span
+    const closeIcon = document.getElementById('closeIcon');
+
+    // Get the terms link
+    const termsLink = document.getElementById('termsLink');
+
+    // Function to close the terms pop-up
+    function closeTermsPopup() {
+        termsPopup.style.bottom = '-100%'; // Hide the pop-up by setting its bottom position to -100%
+    }  
+
+      var agrb = document.querySelector('#agreeButton');
+      var denyb = document.querySelector('#denyButton');
+      agrb.onclick = ()=>{  
+    termsPopup.style.display = 'none';
+      } 
+
+      denyb.onclick = ()=>{  
+    termsPopup.style.display = 'none';
+      }
+
+    // Add an event listener to the close icon to close the terms pop-up
+    closeIcon.addEventListener('click', closeTermsPopup);
+
+    // Add an event listener to the terms link to navigate users to the terms page
+    termsLink.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default link behavior
+        window.location.href = '/terms'; // Replace '/terms' with your actual terms page URL
+    });
+
+    // Show the terms pop-up when the page loads
+    window.addEventListener('load', function() {
+        termsPopup.style.bottom = '0'; // Show the pop-up by setting its bottom position to 0
+    });
+      
+      </script>
+      
+      <script src="js/jquery.min.js"></script> 
+      <script src="js/popper.min.js"></script> 
+      <script src="js/bootstrap.bundle.min.js"></script> 
+      <script src="js/jquery-3.0.0.min.js"></script> 
+      <script src="js/plugin.js"></script> 
+      <!-- sidebar --> 
+      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script> 
+      <script src="js/custom.js"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script>
+         $(document).ready(function(){
+         $(".fancybox").fancybox({
+         openEffect: "none",
+         closeEffect: "none"
+         });
+         
+         $(".zoom").hover(function(){
+         
+         $(this).addClass('transition');
+         }, function(){
+         
+         $(this).removeClass('transition');
+         });
+         }); 
+    
+
+         
+      </script> 
+   </body>
+</html>

@@ -1,0 +1,83 @@
+ 
+ 
+ 
+<!DOCTYPE html>
+<html>
+    <head>
+         <%- include('../partials/head.ejs') %> 
+         <%- include('../partials/header.ejs') %>  
+         <title>Admin Control</title>
+    </head>
+
+     <body>  
+     <div class="postcontent">   
+        <!----------categories---------------->
+
+        <p class="bigg">Compose a post</p> 
+        
+          <form id="postar" enctype="multipart/form-data">     
+            <input id="potitle" type="text" placeholder="Post title e.g medical counselling" required>   
+            <input id="author" type="text" placeholder="Author name" required>
+            <textarea id="postbodyb" placeholder="Postbody..." required></textarea>
+            <input type="file" id='adminfile' accept="image/*"  name='videofile' required>
+            <button class="postbut"><p id="postingg">POST</p></button>  
+            </form>      
+       </div>     
+
+
+        <script>
+ 
+
+             var postar = document.getElementById('postar'); 
+              postar.addEventListener('submit', async (event)=>{
+                const pb = document.getElementById('postbut'); 
+                        event.preventDefault(); 
+                        var postingg = document.getElementById('postingg');
+ 
+                     postingg.innerHTML = 'POSTING...'; 
+               const potitle = document.getElementById('potitle').value; 
+               const postbody = document.getElementById('postbodyb').value;
+               const author = document.getElementById('author').value;
+                const admfile = document.getElementById('adminfile').files[0];
+                 
+
+                      const data = new FormData();
+                      data.append('posttitle', potitle); 
+                      data.append('postbody', postbody);
+                      data.append('author', author);
+                      data.append('postImage', admfile); 
+                         
+
+                     try{
+                const response = await fetch('/postingcontent', { 
+                     method :'POST',
+                     body : data,   
+                }); 
+                  
+                if(!response.ok){ 
+                    throw response;
+                } 
+                  console.log(data);
+                  const posted = document.getElementById('posted'); 
+
+               setTimeout( ()=>{  
+               postingg.innerHTML = 'POSTED';
+               }, 4000);
+
+               setTimeout( ()=>{ 
+               window.location.href = '/onosco-blog';
+               }, 7000);
+                
+              }
+                catch(err){
+                  const error = await err.text;   
+                  location.reload();
+                }
+
+                });    
+         
+ 
+        </script>
+    </body>
+    </html>
+    

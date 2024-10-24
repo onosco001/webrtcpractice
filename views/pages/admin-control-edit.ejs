@@ -1,0 +1,96 @@
+  
+  <!DOCTYPE html>
+  <html>
+      <head>
+           <%- include('../partials/head.ejs') %> 
+           <style>
+            .guide{
+              margin-top:10px;
+              margin-bottom:10px;
+              font-weight:bold;
+              font-size:16px;
+              font-family:'Poppins', sans-serif; 
+            }
+           </style> 
+      </head>
+  
+       <body>    
+           <%- include('../partials/header.ejs') %>  
+
+     <div class="postcontent">   
+        <!----------categories---------------->
+
+        <p class="bigg">Edit post</p>  
+
+          <form id="postaredit" data-postid ='<%= thepost._id %>' enctype="multipart/form-data">     
+            <input id="potitle" type="text" value="<%= thepost.posttitle %>" required>   
+            <input id="author" type="text" value="<%= thepost.author %>" required>
+            <textarea id="postbodyb" required><%= thepost.postbody %></textarea>
+            <p class="guide">Click on the button below to upload a new picture 
+              and replace existing one or leave without replacing</p> 
+            <input type="file" id='adminfile' accept="image/*"> 
+            <button class="postbut"><p id="postingg">Save changes</p></button>  
+            </form>      
+       </div>     
+
+
+        <script>
+ 
+
+             var postaredit = document.querySelector('#postaredit'); 
+              postaredit.addEventListener('submit', async (p)=>{
+                        p.preventDefault(); 
+                        const postid = p.target.dataset.postid;
+                        var postingg = document.getElementById('postingg');
+ 
+                     postingg.innerHTML = 'UPDATING...';
+                     
+               const potitle = document.getElementById('potitle').value; 
+               const postbody = document.getElementById('postbodyb').value;
+               const author = document.getElementById('author').value;
+                const admfile = document.getElementById('adminfile').files[0];
+                 
+
+                      const data = new FormData();
+                      data.append('posttitle', potitle); 
+                      data.append('postbody', postbody);
+                      data.append('author', author);
+
+                      //check if user uploads new video or not
+                      data.append('videofile', admfile); 
+                
+                      try{
+                const ediresponse = await fetch(`/posting-edited-contentb/${postid}`, {
+                     
+                     method :'put',
+                     body : data,   
+                },);  
+
+                if(!ediresponse.ok){
+                    throw ediresponse;
+                }
+                  console.log(data);
+                  const posted = document.getElementById('posted');
+
+               setTimeout( ()=>{  
+               postingg.innerHTML = 'UPDATED'; 
+               }, 4000);
+
+               setTimeout( ()=>{ 
+               location.reload();
+               }, 6000);
+            }
+
+                 catch(err){ 
+                  const error = await err.text(); 
+                 alert(error);  
+                  location.reload();
+                };   
+             
+             }); 
+                 
+  
+        </script>
+       </body>
+       </html> 
+    

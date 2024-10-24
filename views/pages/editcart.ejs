@@ -1,0 +1,105 @@
+
+  
+  <!DOCTYPE html>
+  <html>
+      <head>
+           <%- include('../partials/head.ejs') %> 
+           <style>
+            .guide{
+              margin-top:10px;
+              margin-bottom:10px;
+              font-weight:bold;
+              font-size:16px;
+              font-family:'Poppins', sans-serif; 
+            }
+           </style> 
+      </head>
+  
+       <body>    
+           <%- include('../partials/header.ejs') %>  
+
+     <div class="postcontent">   
+        <!----------categories---------------->
+   
+
+          <form id="postaredit" cartid ='<%= thecart._id %>' enctype="multipart/form-data">     
+            <p class='bigg'><%=thecart.service.serviceName%></p> <br>
+            <p>Please follow the pattern in the input boxes to input the day and time for the service appointment</p>
+           <br> <input id="potitle" type="text" value="<%=thecart.session%>" required>  
+            <input id="poverse" type="text" value="<%=thecart.day%>" required> 
+            <textarea id="postbodyb" placeholder = '<%=thecart.service.serviceDescription%>' disabled></textarea>
+             
+            <button class="postbut"><p id="postingg">Save changes</p></button>  
+            </form>      
+       </div>        
+
+
+        <script>
+ 
+
+             var postaredit = document.querySelector('#postaredit'); 
+              postaredit.addEventListener('submit', async (p)=>{
+                        p.preventDefault(); 
+                        var cartId = p.target.getAttribute('cartid'); 
+                        var postingg = document.getElementById('postingg');  
+
+                     postingg.innerHTML = 'UPDATING...';
+                     
+               const potitle = document.getElementById('potitle').value;
+               const poverse = document.getElementById('poverse').value;  
+                   
+
+               if(poverse.length > 15){
+                alert('String provided too long for scheduled day'); 
+                postingg.innerHTML = 'Save changes';
+               } else if(potitle.length > 12) {
+                   alert('String provided too long for scheduled day'); 
+                postingg.innerHTML = 'Save changes';
+               } else {
+   
+
+                      const data = {
+                            session : potitle,
+                            day : poverse,
+                      } 
+
+                       
+                
+                      try{
+                const ediresponse = await fetch(`/posting-edited-content/${cartId}`, {
+                     method : 'put',
+                     body : JSON.stringify(data), 
+                     headers: {
+                     'Content-Type': 'application/json'
+                  },
+                },);  
+
+                if(!ediresponse.ok){
+                    throw ediresponse;
+                }
+                  console.log(data);
+                  const posted = document.getElementById('posted');
+
+               setTimeout( ()=>{  
+               postingg.innerHTML = 'UPDATED'; 
+               }, 4000);
+
+               setTimeout( ()=>{ 
+               window.location.href = '/checkout';
+               }, 5000);
+            }
+
+                 catch(err){ 
+                  const error = await err.text();
+                  alert(error);
+                 console.log(error);  
+                };   
+              }
+                
+             }); 
+                 
+  
+        </script>
+       </body>
+       </html> 
+    

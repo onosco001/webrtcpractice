@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head.ejs'); %>
+    <title>Admin Order Tracking</title>
+    <style>
+        .search-container {
+            display: flex;
+            align-items: center; 
+            margin-left:20px;
+            margin-right:20px;
+            padding-left:20px;
+            padding-right:20px;
+            margin-bottom:30px;
+        }
+        .search-container input[type=text] {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+        }
+        .search-container button {
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            background-color:green;
+            color: white;
+            border-radius: 4px; 
+        }
+        .search-container button:hover {
+            background-color: black;
+        } 
+
+        h1{
+            text-align:center;
+        }
+
+    </style>
+</head>
+<body> 
+    <%- include('../partials/header.ejs'); %>
+    <h1>Admin Order Tracking</h1>
+
+    <div class="search-container">
+        <form id='trackee'>
+            <input type="text" id="orderId" placeholder="Enter Order ID" required>
+            <button id='bbtt' type="submit">Search</button>
+        </form>
+    </div> 
+
+    <p style="padding-left:20px; padding-right:20px; font-size:19px; margin-bottom:30px;" id="stm"></p>
+     
+    <%- include('../partials/footer.ejs'); %>
+
+    <script> 
+
+      
+
+       // async function settleOrder() {
+         //   const orderId = document.getElementById('orderId').value;
+         //   const response = await fetch(`/settleorder/${orderId}`, { method: 'POST' });
+         //   if (!response.ok) {
+           //     throw new Error('Failed to settle the order.');
+          //  }
+          //  const data = await response.json();
+           // document.getElementById('sbntm').innerHTML = `Order settled successfully`;
+       // }
+
+      
+
+        // Handle form submission
+document.getElementById('trackee').addEventListener('submit', async function(event) {
+    event.preventDefault(); 
+    const orderId = document.getElementById('orderId').value;
+    const bt = document.getElementById('bbtt');
+    var msg = document.getElementById('stm'); 
+    bt.innerHTML = 'searching..';
+    bt.style.opacity = '0.6776';
+    try {
+        const response = await fetch(`/trackorder/${orderId}`);
+        if (!response.ok) {
+            throw response; 
+        }    
+        
+    msg.innerHTML = ''; // Clear any previous error message  
+        bt.innerHTML = 'search';
+        bt.style.opacity = '1'; 
+        const orderinfo = await response.json(); // Assuming the response contains orderinfo
+     const theid = orderinfo.message;   
+     //redirect to view the data
+     window.location.href = `/orderinformation/${theid}`;
+
+     } catch (err) {    
+        const error = await err.json(); 
+        msg.innerHTML = error.message;
+        bt.innerHTML = 'search';
+       bt.style.opacity = '1'; 
+    }
+}); 
+
+    </script>
+</body>
+</html>

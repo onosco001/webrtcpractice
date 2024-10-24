@@ -1,0 +1,256 @@
+ 
+      
+<!DOCTYPE html>
+<html>
+    <head>
+         <%- include('../partials/head.ejs') %> 
+         <title>signup</title>
+    </head>
+
+     <body> 
+  
+          <%- include('../partials/header.ejs') %> 
+          
+          <div class="loginf">   
+         
+            <form id="reggo">   
+                  
+                    <p class="bigg"> Register </p>  
+              <input id="regname" type="text" placeholder="Preferred username" required>  
+              <input id="regem" type="email" placeholder="Email" required>   
+              <input id="signpass" type="password" placeholder="Preferred Password" required>
+                   <p id="errsignup"></p>
+               <input id="dsame" type="password" placeholder="confirm Password" required>
+               <p id="twins"></p> 
+              <input id="firstname" type="text" placeholder="First name" required> 
+              <input id="lastname" type="text" placeholder="Last name" required>
+              <p id="lgr"></p> 
+              <button><p id='mup'>Register</p></button> 
+              <div class="forgotandcreate"> 
+                <a href="login">Already have an account?</a> 
+                </div> 
+              </form>  
+
+              <div class="agree-terms">
+                <input type="checkbox" id="agreeTerms" required>
+                <label for="agreeTerms">By registering , you agree to <a style='color:dodgerblue' href="/terms">our terms and policies</a></label>
+            </div>
+
+         </div>   
+ 
+   
+         <%- include('../partials/footer.ejs') %> 
+
+         <script>
+
+             
+       
+           
+                            ()=>{
+                    var errsignup = document.getElementById('errsignup');  
+                    var twins = document.getElementById('twins');  
+                    var mup = document.getElementById('mup');
+                    var signpass = document.getElementById('signpass');     
+                    var regname = document.getElementById('regname');  
+                    var regem = document.getElementById('regem');  
+                    var firstname = document.getElementById('firstname'); 
+                    var lastname = document.getElementById('lastname');              
+                    var dsame = document.getElementById('dsame');  
+                    var loginerr = document.getElementById('lgr');
+                            };
+ 
+                 signpass.onkeyup = function() {
+                    
+                if(signpass.value.search(/[a-z]/) < 0){
+                    errsignup.innerHTML = 'incomplete!, password must contain lowercase character';
+                    errsignup.style.color = 'red';
+                    errsignup.style.textAlign = 'center';
+                    errsignup.style.marginTop = '7px';
+                    errsignup.style.fontWeight = 'bold';
+                    errsignup.style.fontSize = '16px';
+                    mup.disabled = true;
+                    mup.style.opacity = '0.2';
+                    errsignup.style.fontFamily = 'helvetica';
+                }   
+
+                
+
+                  
+               else if(signpass.value.search(/[A-Z]/) < 0){
+                    errsignup.innerHTML = 'incomplete!, password must contain uppercase character';
+                    errsignup.style.color = 'red';
+                    errsignup.style.textAlign = 'center';
+                    errsignup.style.marginTop = '7px';
+                    errsignup.style.fontWeight = 'bold';
+                    errsignup.style.fontSize = '16px';
+                    mup.disabled = true;
+                    mup.style.opacity = '0.2';
+                    errsignup.style.fontFamily = 'helvetica';
+                }     
+
+                else if(signpass.value.search(/[0-9]/) < 0){
+                    errsignup.innerHTML = 'invalid!, password must contain number';
+                    errsignup.style.color = 'red';
+                    errsignup.style.textAlign = 'center';
+                    errsignup.style.marginTop = '7px';
+                    errsignup.style.fontWeight = 'bold';
+                    errsignup.style.fontSize = '16px';
+                    mup.disabled = true;
+                    mup.style.opacity = '0.2';
+                    errsignup.style.fontFamily = 'helvetica';
+                }  
+
+                else if(signpass.value.search(/[!@#^&*$£%]/) < 0){
+                    errsignup.innerHTML = 'password must contain at least one symbol';
+                    errsignup.style.color = 'red';
+                    errsignup.style.textAlign = 'center';
+                    errsignup.style.marginTop = '7px';
+                    errsignup.style.fontWeight = 'bold';
+                    mup.disabled = true;
+                    mup.style.opacity = '0.2';
+                    errsignup.style.fontSize = '16px';
+                    errsignup.style.fontFamily = 'helvetica';
+                } 
+ 
+
+
+                 
+                else if(signpass.value.length < 8){
+                    errsignup.innerHTML = 'oops!, password is too short and weak';
+                    errsignup.style.color = 'red';
+                    errsignup.style.textAlign = 'center';
+                    errsignup.style.marginTop = '7px';
+                    errsignup.style.fontWeight = 'bold';
+                    errsignup.style.fontSize = '16px';
+                    mup.disabled = true;
+                    mup.style.opacity = '0.2';
+                    errsignup.style.fontFamily = 'helvetica';
+                }  
+
+                else if(signpass.value.length > 24){
+                    errsignup.innerHTML = 'oops!, password is too long';
+                    errsignup.style.color = 'red';
+                    errsignup.style.textAlign = 'center';
+                    errsignup.style.marginTop = '7px';
+                    errsignup.style.fontWeight = 'bold';
+                    errsignup.style.fontSize = '16px';
+                    mup.disabled = true;
+                    mup.style.opacity = '0.2';
+                    errsignup.style.fontFamily = 'helvetica';
+                } 
+
+
+
+                 else{
+                    errsignup.innerHTML = 'Password is strong';
+                    errsignup.style.color = 'green';
+                    errsignup.style.textAlign = 'center';
+                    errsignup.style.marginTop = '7px';
+                    errsignup.style.fontWeight = 'bold';
+                    errsignup.style.fontSize = '16px';
+                    mup.disabled = false;
+                    mup.style.opacity = '2';
+                    errsignup.style.fontFamily = 'helvetica';
+                 } 
+ 
+                 };     
+
+
+                 dsame.onkeyup = function() {
+                    errsignup.innerHTML = '';
+                    if(signpass.value !== dsame.value){
+                       twins.innerHTML = 'Fields must be of same value'; 
+                    twins.style.color = 'red';
+                    twins.style.textAlign = 'center';
+                    twins.style.marginTop = '7px';
+                    twins.style.fontWeight = 'bold';
+                  twins.style.fontSize = '16px';
+                  mup.disabled = true;
+                    mup.style.opacity = '0.2';
+                    twins.style.fontFamily = 'helvetica';
+                    }  
+
+                    else{
+ 
+                       twins.innerHTML = 'perfect';
+                    twins.style.color = 'green';
+                    twins.style.textAlign = 'center';
+                    twins.style.marginTop = '7px';
+                    twins.style.fontWeight = 'bold';
+                  twins.style.fontSize = '16px';
+                  mup.disabled = false;
+                    mup.style.opacity = '2';
+                    twins.style.fontFamily = 'helvetica';
+                        
+                    } 
+
+                 } 
+
+
+
+                 var reggo = document.getElementById('reggo');
+                 reggo.addEventListener('submit', async (r)=>{
+                    r.preventDefault(); 
+                    twins.innerHTML = '';
+                    mup.innerHTML = 'Registering..';
+                    mup.style.opacity = '0.855';
+ 
+
+                    const datareg = { 
+                          reguser : regname.value,
+                          regemail : regem.value, 
+                          regpass : signpass.value,  
+                         firstname: firstname.value,
+                          lastname : lastname.value, 
+                     }; 
+                 
+                     try{
+                const response = await fetch('/postingregistration', {
+                     
+                     method :'post',
+                     body : JSON.stringify(datareg),
+                     headers:{
+                                    'Content-Type':'application/json',
+                                    Accept:'application/json',
+                             }
+         });  
+
+             if(!response.ok){
+                throw response;
+             }   
+             mup.style.opacity = '1';
+         
+         setTimeout(() => {
+            mup.innerHTML = 'Register successful..'; 
+            }, 3000);  
+
+            setTimeout(() => { 
+             window.location.href = '/login';
+            }, 5000);
+
+        }    
+
+          catch(err) {
+            var loginerr = document.getElementById('lgr');
+               mup.innerHTML = 'Register'; 
+                   const erresult = await err.text(); 
+                    loginerr.innerHTML = erresult;
+                    loginerr.style.color = 'red';
+                    loginerr.style.marginTop = '10px';
+                    loginerr.style.fontSize = '16px';
+                    loginerr.style.fontWeight = 'bold';
+                    loginerr.style.fontFamily = 'helvetica';
+          }
+
+                 });
+        
+                 
+     var logmein = document.getElementById('logmein');
+     logmein.onclick = function() {
+           window.location.href = '/login';
+
+     }
+
+         </script>
+     </body>
+</html>

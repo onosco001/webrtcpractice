@@ -1,0 +1,108 @@
+ 
+  
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <%- include('../partials/head.ejs'); %>
+      <title>Order Details</title>
+      <style>
+          .containerorder{ 
+            min-width:100px;
+            margin-bottom:40px;
+            padding-left:20px;
+            padding-top:10px;
+            padding-right:20px;
+              margin-left:20px;
+              margin-right:20px;
+              border: 1px solid #ccc;
+              padding-bottom:20px;
+              border-radius: 5px; 
+          }
+          .order-details {
+              margin-bottom: 20px;
+          }
+          .label {
+              font-weight: bold;
+          } 
+          /* Button styles */
+      .settle-button {
+        padding: 10px 20px; 
+        background-color: #fdc24f;
+        color: white;
+        border: none;
+        font-weight:bold;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .settle-button:hover {
+        background-color: black;
+      }
+      </style>
+  </head>
+  <body>
+    <%- include('../partials/header.ejs'); %>
+  <div class="containerorder">
+      <div class="order-details">
+          <span class="label">ID:</span>
+          <span id="orderId"><%=theorder._id%></span>
+      </div> 
+      <div class="order-details">
+          <span class="label">Transaction Reference:</span>
+          <span id="transactionReference"><%=theorder.txref%></span>
+      </div>
+      <div class="order-details"> 
+        <% theorder.myServices.forEach(each=>{ %>
+          <span class="label">Service Name:</span>
+          <span id="serviceName"><%=each.serviceName%></span>   
+          <span class="label">Service Price:</span>
+          <span id="servicePrice"> €<%=each.servicePrice%></span>  <br>
+        <% }); %>
+      </div>
+      <div class="order-details">
+        <% for (let i = 0; i < theorder.day.length; i++) { %>
+            <span class="label">Service Day & Session:</span>
+            <span id="serviceDaySession"><%= theorder.day[i] %> - <%= theorder.session[i] %></span> <br>
+        <% } %>
+    </div>
+      <div class="order-details"> 
+          <span class="label">Status:</span>
+          <span style='color:green; font-weight:bold' id="status"><%=theorder.status%></span>
+     </div> 
+   
+        <!-- Settle Order button -->
+    <button id="btt" class="settle-button" onclick="settleOrder()">Settle Order</button>
+   <input type="text" id="dval" value="<%=theorder._id%>" hidden>
+
+  </div>  
+  
+  <%- include('../partials/footer.ejs') %> 
+
+  <script>
+     async function settleOrder() {
+            var dv = document.getElementById('dval').value;
+            const bt = document.getElementById('btt');
+            bt.innerHTML = 'settling..';
+       bt.style.opacity = '0.6776';
+            try {
+        const response = await fetch(`/settleorder/${dv}`);
+        if (!response.ok) {
+            throw response; 
+        }   
+
+        bt.innerHTML = 'Settle Order';
+       bt.style.opacity = '1';
+        alert('Order settled successfully'); 
+        window.location.href = '/';  
+        } 
+        catch(err){
+            bt.innerHTML = 'Settle Order';
+       bt.style.opacity = '1';
+             const error = await err.text();
+             alert(error);
+        }
+     } 
+  </script>
+
+  </body>
+  </html>
+  

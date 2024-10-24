@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <%- include('../partials/head.ejs'); %>
+  <title>Reset password</title> 
+</head>
+<body>
+    
+  <%- include('../partials/header.ejs'); %>
+
+    <div class="loginf">
+        <form id="reset">
+        <i class="fa fa-key"></i> <br>
+        <p class="bigg">Enter your gmail to continue password reset..A link will 
+            be sent to reset your password</p>
+        <input id="validemail" type="email" required> 
+        <button id="sending">Reset</button>
+      </form>
+       </div>  
+
+       <%- include('../partials/footer.ejs'); %>
+
+       <script>
+                     
+         
+          var rst = document.getElementById('reset');   
+          rst.addEventListener('submit', async (vm)=>{
+               vm.preventDefault(); 
+           var vml = document.getElementById('validemail').value; 
+           var snd = document.getElementById('sending');
+           snd.style.opacity = '0.655';
+           snd.innerHTML='Checking Email..';
+           const dataa = {
+                 anemail : vml,
+           }   
+
+
+          try{
+           const resp = await fetch('/submitemail', {
+            body : JSON.stringify(dataa),
+            method : 'post',
+            headers : {
+                  'Content-Type' : 'application/json',
+                  Accept : 'application/json',
+            },
+           });
+
+           if(!resp.ok){
+             throw resp;
+           }  
+             alert('Email sent, please check your inbox or spam');
+           snd.style.opacity = '1';
+           location.reload();
+
+        }
+
+        catch(err){
+            const error = await err.text();
+            alert(error);
+            location.reload();
+        }
+        
+        });
+       </script>
+
+</body>
+</html>
