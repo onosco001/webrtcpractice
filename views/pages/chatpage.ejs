@@ -160,11 +160,11 @@
 <body>  
 
 
-    <audio id="displayAud" controls> 
+    <audio id="displayAud" autoplay muted> 
         Your browser does not support the audio element.
     </audio> 
 
-    <audio id="displayRemAud" controls> 
+    <audio id="displayRemAud" autoplay> 
         Your browser does not support the audio element.
     </audio>
 
@@ -383,19 +383,29 @@
         });   
 
         const pc = new RTCPeerConnection();
+        // Correctly handle incoming tracks
+  pc.ontrack = (event) => { 
+    const remoteStream = new MediaStream();
+    remoteStream.addTrack(event.track);
+    const displayRemAud = document.getElementById('displayRemAud');
+    displayRemAud.srcObject = remoteStream;  
+};
 
-          var call = document.getElementById('acall');
-          
-          
-          call.onclick = function() { 
-    alert('calling');    
+
+          var call = document.getElementById('acall'); 
+          call.onclick = function() {
+    if (!pc) {
+        alert('Peer connection not established.');
+        return;
+    }
+    
+    alert('Calling...');    
     navigator.mediaDevices.getUserMedia({ audio: true })
         .then((stream) => {
             var displayAud = document.getElementById('displayAud');
             displayAud.srcObject = stream;  
             stream.getTracks().forEach((track) => { 
-                // Track added and ready to be shared remotely 
-                pc.addTrack(track, stream); 
+                pc.addTrack(track, stream); // Ensure you pass the stream here
             });
 
             // Create the offer after getting the media
@@ -403,10 +413,7 @@
         })
         .then((offer) => {
             return pc.setLocalDescription(offer).then(() => {
-                // Now that local description is set, we can safely access it
-                const localDescription = pc.localDescription;
-                console.log(localDescription);
-                socket.emit('offer', JSON.stringify(localDescription));
+                socket.emit('offer', JSON.stringify(pc.localDescription));
             });
         })
         .catch((err) => {
@@ -426,7 +433,7 @@ socket.on('offer', (data) => {
             displayAud.srcObject = stream;  
             stream.getTracks().forEach((track) => { 
                 // Track added and ready to be shared remotely 
-                pc.addTrack(track, stream); 
+                pc.addTrack(track); 
             });
 
             return pc.setRemoteDescription(localDescription); 
@@ -456,14 +463,7 @@ socket.on('offer', (data) => {
     });
      
 
-  // Correctly handle incoming tracks
-  pc.ontrack = (event) => { 
-    const remoteStream = new MediaStream();
-    remoteStream.addTrack(event.track);
-    const displayRemAud = document.getElementById('displayRemAud');
-    displayRemAud.srcObject = remoteStream;  
-};
-
+  
        
    </script>
 
