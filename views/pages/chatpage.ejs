@@ -289,7 +289,7 @@
        chatInput.addEventListener('keypress', (e)=>{
          if(e.key === 'Enter'){
             let message = chatInput.value;  
-            socket.emit('chatmsg', {message, room, auser});
+            socket.emit('chatmsg', {message, room});
 
             // Create new div for the user's message
             let newDiv = document.createElement('div'); 
@@ -314,7 +314,7 @@
         let sendButton = document.getElementById('send-button');
         sendButton.onclick = () => {  
             let message = chatInput.value;    
-            socket.emit('chatmsg', {message, room, auser});
+            socket.emit('chatmsg', {message, room});
 
             // Create new div for the user's message
             let newDiv = document.createElement('div'); 
@@ -345,10 +345,10 @@
   
        //let's listen for incoming messages 
         socket.on('newmessage', (data) => {  
-            const {message, auser} = data;  
+            const {message} = data;  
        // let theuser = document.getElementById('myself').getAttribute('myinfo');  
             // Create new div for the user's message 
-            if(auser !== theuser){
+           // if(auser !== theuser){
             let newDiv = document.createElement('div'); 
             let messageContainer = document.getElementById('message-container');
             newDiv.innerHTML = `
@@ -363,23 +363,23 @@
                     </div>
                     </div> `;
             messageContainer.appendChild(newDiv);  
-                }  else {
+               // }  else {
                         // Create new div for the user's message
-            let newDiv = document.createElement('div'); 
-            let messageContainer = document.getElementById('message-container');
-            newDiv.innerHTML = `
-             <div class="chat-message-right">
-                    <div>
-                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
-                    <div class="text-muted small text-nowrap mt-2">2:35 am</div>
-                    </div>
-                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                    <div class="font-weight-bold mb-1">You</div>
-                     ${message}
-                    </div>
-                    </div> `;
-            messageContainer.appendChild(newDiv); 
-                }
+          //  let newDiv = document.createElement('div'); 
+          //  let messageContainer = document.getElementById('message-container');
+          //  newDiv.innerHTML = `
+          //   <div class="chat-message-right">
+                 //   <div>
+                //    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                //    <div class="text-muted small text-nowrap mt-2">2:35 am</div>
+                //    </div>
+                //    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                //    <div class="font-weight-bold mb-1">You</div>
+                //     ${message}
+                  //  </div>
+                //    </div> `;
+          //  messageContainer.appendChild(newDiv); 
+              //  }
         });   
 
         const pc = new RTCPeerConnection();
